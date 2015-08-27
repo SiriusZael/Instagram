@@ -66,8 +66,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         userNameView.text = photo.valueForKeyPath("user.username") as? String
         headerView.addSubview(userNameView)
         
-        // Add a UILabel for the username here
-        
         return headerView
     }
     
@@ -78,10 +76,10 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("PhotoCell", forIndexPath: indexPath) as! PhotoCell
         
-        let photo = photos![indexPath.row]
+        let photo = photos![indexPath.section]
         
         let url = NSURL(string: photo.valueForKeyPath("images.thumbnail.url") as! String)!
-        
+
         cell.photoView.setImageWithURL(url)
         
         return cell
