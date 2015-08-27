@@ -17,6 +17,15 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tableFooterView: UIView = UIView(frame: CGRect(x:0, y:0, width:320, height:50))
+        var loadingView: UIActivityIndicatorView = UIActivityIndicatorView()
+        loadingView.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        
+        loadingView.startAnimating()
+        loadingView.center = tableFooterView.center
+        tableFooterView.addSubview(loadingView)
+        self.tableView.tableFooterView = tableFooterView
+        
         self.refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         self.refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
@@ -82,6 +91,10 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
 
         cell.photoView.setImageWithURL(url)
         
+        if indexPath.section == numberOfSectionsInTableView(tableView) {
+        
+        }
+        
         return cell
     }
     
@@ -120,5 +133,4 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
             self.tableView.reloadData()
         }
     }
-    
 }
